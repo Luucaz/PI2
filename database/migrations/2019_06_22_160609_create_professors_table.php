@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePpcsTable extends Migration
+class CreateProfessorsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class CreatePpcsTable extends Migration
      */
     public function up()
     {
-        Schema::create('ppcs', function (Blueprint $table) {
+        Schema::create('professors', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
-            $table->string('perfilcurso');
-            $table->string('perfilingresso');
         });
     }
 
@@ -28,6 +26,6 @@ class CreatePpcsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ppcs');
+        Schema::dropIfExists('professors');
     }
 }

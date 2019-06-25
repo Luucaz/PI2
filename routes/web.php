@@ -11,38 +11,36 @@
 |
 */
 
-Route::get('/', function () {
-    return view('Home');
-});
-Route::get('/cursos', 'CursosController@list');
-Route::post('/cursos', 'CursosController@store');
-
-
-Route::get('/ppc', function () {
-    return view('interno.ppc');
-});
-Route::get('/professor', function () {
-    return view('interno.professor');
-});
-Route::get('/form/professor', function () {
-    return view('interno.formprofessor');
-});
-Route::get('/disciplina', function () {
-    return view('interno.disciplina');
-});
-Route::get('/plano', function () {
-    return view('interno.plano');
-});
-Route::get('/cronograma', function () {
-    return view('interno.cronograma');
-});
-Route::get('/bibliografia', function () {
-    return view('interno.bibliografia');
-});
-Route::get('/reuniao', function () {
-    return view('interno.bibliografia');
-});
-Route::get('/mec', function () {
-    return view('interno.bibliografia');
-});
+Route::view('/', 'home');
 Route::view('sobre', 'sobre');
+
+//Route::get('cursos', 'CursosController@index');
+//Route::get('cursos/create', 'CursosController@create');
+//Route::post('cursos', 'CursosController@store');
+//Route::get('cursos/{curso}', 'CursosController@show');
+//Route::get('cursos/{curso}/edit', 'CursosController@edit');
+//Route::patch('cursos/{curso}', 'CursosController@update');
+//Route::delete('cursos/{curso}', 'CursosController@destroy');
+//
+//Exemplo de rota simplificada 'RestFull' onde todas as rotas acima são envolvidas
+//em apenas uma rota 'resource'
+//
+Route::resource('cursos', 'CursosController')->middleware(['auth', 'auth.admin']);
+Route::resource('ppcs', 'PpcsController')->middleware(['auth', 'auth.professor']);
+Route::resource('coordenadores', 'CoordenadoresController')->middleware(['auth', 'auth.admin']);
+
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/admin', function (){
+    return 'você é administrador';
+})->middleware(['auth', 'auth.admin']);
+
+
+
+Route::namespace('Admin')->prefix('admin')->middleware(['auth', 'auth.admin'])->name('admin.')->group(function (){
+    Route::resource('/users', 'UserController', ['except' => ['show', 'create', 'store']]);
+
+});

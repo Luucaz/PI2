@@ -4,12 +4,12 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ppc extends Model
+class Ppc extends Model
 {
     protected $guarded = [];
 
-    public function cursos()
+    public function curso()
     {
-        return $this-> hasMany(cursos::class);
+        return $this->belongsTo(\App\Curso::class);
     }
 }

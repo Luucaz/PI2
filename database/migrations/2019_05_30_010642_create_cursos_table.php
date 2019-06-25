@@ -15,10 +15,18 @@ class CreateCursosTable extends Migration
     {
         Schema::create('cursos', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('coordc_id');
             $table->timestamps();
-            $table->string('title');
+            $table->string('denominação');
             $table->string('tipo');
-            $table->integer('active');
+            $table->integer('modalidade');
+            $table->string('habilitação');
+            $table->string('local');
+            $table->string('turno');
+            $table->string('regime');
+            $table->integer('vaga');
+            $table->integer('carga');
+            $table->integer('periodo');
         });
     }
 

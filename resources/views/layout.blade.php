@@ -12,9 +12,12 @@
 <body>
 
 
-
+<div class="alert alert-success" role="alert">
+    <strong>Pronto!</strong> {{session()->get('message')}}
+</div>
 <div class="container">
     @include('nav')
+
     @yield('content')
 </div>
 
